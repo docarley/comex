@@ -38,6 +38,86 @@ $produtos = [
     ]
 ];
 
+function retornarProdutoMaisCaro(array $arrayProdutos): string
+{
+    $indiceDoMaisCaro = 0;
+    foreach ($arrayProdutos as $chave => $produto) {
+        if ($arrayProdutos[$chave]['preco'] > $arrayProdutos[$indiceDoMaisCaro]['preco']) {
+            $indiceDoMaisCaro = $chave;
+        }
+    }
+    return "O produto mais caro é {$arrayProdutos[$indiceDoMaisCaro]['nome']} que custa R$ " .
+        number_format($arrayProdutos[$indiceDoMaisCaro]['preco'], 2, ".", "");
+}
+
+function retornarProdutoMaisBarato(array $arrayProdutos): string
+{
+    $indiceDoMaisBarato = 0;
+    foreach ($arrayProdutos as $chave => $produto) {
+        if ($arrayProdutos[$chave]['preco'] < $arrayProdutos[$indiceDoMaisBarato]['preco']) {
+            $indiceDoMaisBarato = $chave;
+        }
+    }
+    return "O produto mais barato é {$arrayProdutos[$indiceDoMaisBarato]['nome']} que custa R$ " .
+        number_format($arrayProdutos[$indiceDoMaisBarato]['preco'], 2, ".", "");
+}
+
+function retornarMediaDePreco(array $arrayProdutos): string
+{
+    $precoAcumulado = 0;
+    foreach ($arrayProdutos as $chave => $valor) {
+        $precoAcumulado = $precoAcumulado + $arrayProdutos[$chave]['preco'];
+    }
+    $media=number_format($precoAcumulado/count($arrayProdutos),2,".","");
+    return "Média de preço: R$ $media";
+}
+
+
+echo retornarProdutoMaisCaro($produtos) . PHP_EOL;
+echo retornarProdutoMaisBarato($produtos) . PHP_EOL;
+echo retornarMediaDePreco($produtos);
+
+
+
+/*>>>>Gerenciar Estoque ============================================================
+$produtos = [
+    [
+        'nome' => 'Leite Longa Vida',
+        'preco' => 3.59,
+        'fabricante' => 'ParmaVita',
+        'embalagem' => '1L',
+        'quantidade' => 50
+    ],
+    [
+        'nome' => 'Achocolatado em Pó',
+        'preco' => 13.99,
+        'fabricante' => 'Neschoc',
+        'embalagem' => '700g',
+        'quantidade' => 20
+    ],
+    [
+        'nome' => 'Azeite de Oliva',
+        'preco' => 28.50,
+        'fabricante' => 'Galinho',
+        'embalagem' => '500ml',
+        'quantidade' => 25
+    ],
+    [
+        'nome' => 'Refrigerante de Limão',
+        'preco' => 7.40,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L',
+        'quantidade' => 30
+    ],
+    [
+        'nome' => 'Chá Mate',
+        'preco' => 7.10,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L',
+        'quantidade' => 15
+    ]
+];
+
 function adicionarProduto(array $arrayProdutos, int $codigoProduto, int $qtd): array
 {
     if ($qtd <= 0) {
@@ -100,8 +180,7 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage() . PHP_EOL;
 }
-
-
+<<<<============================================================*/
 
 
 /*>>>>Criar Lista de Produto============================================================
