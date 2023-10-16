@@ -1,5 +1,22 @@
 <?php
 
+
+$cliente = [
+    'nome'=>'Juquinha da Silva',
+    'email'=> 'juquinha@email.com.br',
+    'celular'=>'5513988775544',
+    'endereço'=>[
+        'cep'=>'11077888',
+        'tipoLogradouro'=>'Avenida',
+        'logradouro'=>'7 de setembro',
+        'numero'=>"343",
+        'complemento'=>'ap 44',
+        'cidade'=>'Old City'
+    ]
+];
+
+
+/*>>>>Gerenciar Estoque ============================================================
 $produtos = [
     [
         'nome' => 'Leite Longa Vida',
@@ -77,6 +94,7 @@ echo retornarProdutoMaisCaro($produtos) . PHP_EOL;
 echo retornarProdutoMaisBarato($produtos) . PHP_EOL;
 echo retornarMediaDePreco($produtos);
 
+<<<<============================================================*/
 
 
 /*>>>>Gerenciar Estoque ============================================================
