@@ -1,0 +1,16 @@
+{
+    "name": "docarley/comex",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Docarley\\Comex\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arley",
+            "email": "docente.arley@gmail.com"
+        }
+    ],
+    "require": {}
+}
