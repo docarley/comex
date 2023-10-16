@@ -1,6 +1,28 @@
 <?php
 
+function verificarDesconto(float $valorCompra):float{
+    if ($valorCompra>=100.00) {
+        return round(($valorCompra * 0.9),2,PHP_ROUND_HALF_UP);
+    }
+    return round(($valorCompra),2,PHP_ROUND_HALF_UP);
+}
 
+function exibirDesconto(float $valorCompra):string{
+    if($valorCompra===verificarDesconto($valorCompra)){
+        $mensagem="Você não possui desconto.";
+    } else {
+        $mensagem="Você possui desconto!";
+    }
+    return PHP_EOL .  "$mensagem " . PHP_EOL . 
+           "Total da Compra R$ $valorCompra"  . PHP_EOL . 
+           "Total da Compra Com Desconto R$ " . verificarDesconto($valorCompra);      
+}
+
+echo exibirDesconto(1023.99);
+echo exibirDesconto(23.99);
+
+
+/*>>>>Criar Cliente ============================================================
 $cliente = [
     'nome'=>'Juquinha da Silva',
     'email'=> 'juquinha@email.com.br',
@@ -14,7 +36,7 @@ $cliente = [
         'cidade'=>'Old City'
     ]
 ];
-
+<<<<============================================================*/
 
 /*>>>>Gerenciar Estoque ============================================================
 $produtos = [
