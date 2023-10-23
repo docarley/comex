@@ -5,6 +5,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 use Docarley\Comex\Model\Cliente;
 use Docarley\Comex\Model\Endereco;
 use Docarley\Comex\Model\Produto;
+use Docarley\Comex\Model\Pedido;
 
 
 /*1*/
@@ -36,4 +37,8 @@ if ($produto->removerProduto(0)<0) {
 }
 echo $produto->toString() . PHP_EOL;
 
-    
+/*3*/
+$outroProduto = new Produto("Arroz Tio Juquinha 5kg",19.90,100);
+
+$pedido = new Pedido(1,$cliente,[$produto,$outroProduto]);
+echo $pedido->exibirDadosDoPedido();

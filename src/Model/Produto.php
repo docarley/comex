@@ -11,6 +11,13 @@ class Produto{
     ) {        
     }
 
+    public function getNome() :string {
+        return $this->nome;
+    }
+
+    public function setNome(string $nome) :void{
+        $this->nome=$nome;
+    }
     public function getPreco() :float {
         return $this->preco;
     }
