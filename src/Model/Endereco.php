@@ -76,11 +76,6 @@ class Endereco
     {
     $this->uf=$uf;
     }
-
-    public function getEndereco(): Endereco
-    {
-        return $this;
-    }  
     public function toString(): string
     {
         return "{$this->getTipoLogradouro()} {$this->getNome()}, {$this->getNumero()} {$this->getComplemento()}, CEP: {$this->getCep()} {$this->getCidade()}-{$this->getUf()}";
