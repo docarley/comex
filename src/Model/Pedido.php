@@ -15,6 +15,18 @@ public function exibirDadosDoPedido():string{
     return "\tPedido: {$this->id}" . PHP_EOL . "\tCliente: {$this->cliente->getNome()}" . PHP_EOL . "{$this->listarProdutos()}";
 }
 
+public function getId():int{
+    return $this->id;
+}
+
+public function getValorTotal():float{
+    $valorTotalPedido=0;
+    foreach ($this->produtos as $item) {
+        $valorTotalPedido+=$item->getPreco;
+    }
+    return $valorTotalPedido;
+}
+
 public function listarProdutos():string{
     $listaProdutos="";
     echo "Lista de Pedidos:" . PHP_EOL;
@@ -23,4 +35,13 @@ public function listarProdutos():string{
     }
     return $listaProdutos;
 }
+
+
+public function adicionarProdutos(Produto $produto):int{
+    array_push($this->produtos, $produto);
+    //$this->produtos[]= $produto;  // alternativa ao array push
+    //array_push($this->produtos, $produto1, $produto2 $produto3); //adicionando mais de um item
+    return count($this->produtos);
 }
+}
+

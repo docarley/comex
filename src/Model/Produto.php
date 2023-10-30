@@ -26,7 +26,7 @@ class Produto{
         $this->preco=$preco;
     }
 
-    public function adicionarProduto(int $qtd):int{
+    public function adicionarProduto(int $qtd = 1 ):int{ //valor default 1 se nada for passado
         if ($qtd>0) {
             $this->qtdEstoque += $qtd;
             return $this->qtdEstoque; //estoque atual
@@ -34,7 +34,7 @@ class Produto{
         return -1; //erro
     }
 
-    public function removerProduto(int $qtd):int{
+    public function removerProduto(int $qtd = 1):int{ //valor default 1 se nada for passado
         if ($qtd>0 && $qtd<=$this->qtdEstoque) {
             $this->qtdEstoque -= $qtd;
             return $this->qtdEstoque; //estoque atual

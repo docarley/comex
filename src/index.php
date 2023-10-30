@@ -2,15 +2,11 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Docarley\Comex\Model\Cliente;
-use Docarley\Comex\Model\Endereco;
-use Docarley\Comex\Model\Produto;
-use Docarley\Comex\Model\Pedido;
-
+use Docarley\Comex\Model\{Cliente,Endereco,Produto,Pedido, CarrinhoCompra};
 
 /*1*/
 $cliente = new Cliente('Pedrinho','44455566677','13988776655',1231,
-    new Endereco('Avenida','Rua das Margaridas','22','ap 55','11090888','Santos','SP'));
+    new Endereco('Avenida','Rua das Margaridas','22','ap 55','11090888','Santos','SP'),[]);
 
 echo $cliente->exibirDadosCliente();
 
@@ -42,3 +38,24 @@ $outroProduto = new Produto("Arroz Tio Juquinha 5kg",19.90,100);
 
 $pedido = new Pedido(1,$cliente,[$produto,$outroProduto]);
 echo $pedido->exibirDadosDoPedido();
+
+/*4*/
+echo $cliente->adicionarPedido($pedido);
+
+$produto1=new Produto("Achocolatado Neschoc 1kg",15.99,120);
+$produto2=new Produto("Feijão Tio Juquinha 1kg",9.99,200);
+$outroPedido=new Pedido(2,$cliente,[$produto1,$produto2]);
+$cliente->adicionarPedido($outroPedido);
+var_dump($cliente);
+
+/*5*/
+
+$carrinho = new CarrinhoCompra([$produto1,$produto2]);
+var_dump($carrinho);
+ echo "Valor Total dos Produtos R$: {$carrinho->getValorTotalProdutos()}". PHP_EOL .
+       "Valor do Frete R$: {$carrinho->getValorFrete()}" . PHP_EOL .
+       "Valor Total da Compra R$: {$carrinho->getValorTotalCompra()}";
+       
+/*6*/
+echo $cliente->exibirDadosCliente() . PHP_EOL;
+echo "Telefone Formatado: {$cliente->getTelefoneFormatado()}";
