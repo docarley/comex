@@ -40,7 +40,7 @@ class Produto{
     public function removerProduto(int $qtd = 1):int{ //valor default 1 se nada for passado
         if ($qtd>0) {
             if ($qtd>$this->qtdEstoque) {
-                throw new EstoqueIndisponivelException($this->qtdEstoque,$qtd);
+                throw new EstoqueIndisponivelException($this->qtdEstoque,$qtd);                
             }
             $this->qtdEstoque -= $qtd;
             return $this->qtdEstoque; //estoque atual
