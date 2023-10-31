@@ -2,6 +2,9 @@
 
 namespace Docarley\Comex\Model;
 
+use InvalidArgumentException;
+use Docarley\Comex\Model\EstoqueIndisponivelException;
+
 class Produto{
     
     public function __construct(
@@ -30,16 +33,19 @@ class Produto{
         if ($qtd>0) {
             $this->qtdEstoque += $qtd;
             return $this->qtdEstoque; //estoque atual
-        }
-        return -1; //erro
+        } 
+        throw new InvalidArgumentException("A quantidade deve ser um número positivo e diferente de zero");       
     }
 
     public function removerProduto(int $qtd = 1):int{ //valor default 1 se nada for passado
-        if ($qtd>0 && $qtd<=$this->qtdEstoque) {
+        if ($qtd>0) {
+            if ($qtd>$this->qtdEstoque) {
+                throw new EstoqueIndisponivelException($this->qtdEstoque,$qtd);
+            }
             $this->qtdEstoque -= $qtd;
             return $this->qtdEstoque; //estoque atual
         }
-        return -1;//erro
+        throw new InvalidArgumentException("A quantidade deve ser um número positivo e diferente de zero");
     }
 
     public function exibirValorTotalEmEstoque():float{
