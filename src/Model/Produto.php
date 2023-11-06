@@ -3,14 +3,15 @@
 namespace Docarley\Comex\Model;
 
 use InvalidArgumentException;
-use Docarley\Comex\Model\EstoqueIndisponivelException;
+use Docarley\Comex\Exceptions\EstoqueIndisponivelException;
 
 class Produto{
     
     public function __construct(
         private string $nome,
         private float $preco,
-        private int $qtdEstoque
+        private int $qtdEstoque, 
+        private int $percentualDesconto,
     ) {        
     }
 
@@ -22,11 +23,18 @@ class Produto{
         $this->nome=$nome;
     }
     public function getPreco() :float {
-        return $this->preco;
+        return $this->preco - $this->preco * ($this->percentualDesconto/100);
     }
 
-    public function setPreco(float $preco) :void {
+    public function getPrecoBase() :float {
+        return $this->preco;
+    }
+    public function setPrecoBase(float $preco) :void {
         $this->preco=$preco;
+    }
+
+    public function getQtdEstoque() :int{
+        return $this->qtdEstoque;
     }
 
     public function adicionarProduto(int $qtd = 1 ):int{ //valor default 1 se nada for passado

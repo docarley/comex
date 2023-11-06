@@ -1,6 +1,6 @@
 <?php
 
-namespace Docarley\Comex\Model;
+namespace Docarley\Comex\Exceptions;
 
 use DomainException;
 class EstoqueIndisponivelException extends DomainException{

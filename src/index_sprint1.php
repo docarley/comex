@@ -1,44 +1,158 @@
 <?php
+/*** SPRINT1 = 5 no total***/
 
-function verificarDesconto(float $valorCompra):float{
-    if ($valorCompra>=100.00) {
-        return round(($valorCompra * 0.9),2,PHP_ROUND_HALF_UP);
-    }
-    return round(($valorCompra),2,PHP_ROUND_HALF_UP);
-}
-
-function exibirDesconto(float $valorCompra):string{
-    if($valorCompra===verificarDesconto($valorCompra)){
-        $mensagem="Você não possui desconto.";
-    } else {
-        $mensagem="Você possui desconto!";
-    }
-    return PHP_EOL .  "$mensagem " . PHP_EOL . 
-           "Total da Compra R$ $valorCompra"  . PHP_EOL . 
-           "Total da Compra Com Desconto R$ " . verificarDesconto($valorCompra);      
-}
-
-echo exibirDesconto(1023.99);
-echo exibirDesconto(23.99);
-
-
-/*>>>>Criar Cliente ============================================================
-$cliente = [
-    'nome'=>'Juquinha da Silva',
-    'email'=> 'juquinha@email.com.br',
-    'celular'=>'5513988775544',
-    'endereço'=>[
-        'cep'=>'11077888',
-        'tipoLogradouro'=>'Avenida',
-        'logradouro'=>'7 de setembro',
-        'numero'=>"343",
-        'complemento'=>'ap 44',
-        'cidade'=>'Old City'
+//1 - Criar Lista de Produto============================================================
+$produtos = [
+    [
+        'nome' => 'Leite Longa Vida',
+        'preco' => 3.59,
+        'fabricante' => 'ParmaVita',
+        'embalagem' => '1L'
+    ],
+    [
+        'nome' => 'Achocolatado em Pó',
+        'preco' => 13.99,
+        'fabricante' => 'Neschoc',
+        'embalagem' => '700g'
+    ],
+    [
+        'nome' => 'Azeite de Oliva',
+        'preco' => 28.50,
+        'fabricante' => 'Galinho',
+        'embalagem' => '500ml'
+    ],
+    [
+        'nome' => 'Refrigerante de Limão',
+        'preco' => 7.40,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L'
+    ],
+    [
+        'nome' => 'Chá Mate',
+        'preco' => 7.10,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L'
     ]
 ];
-<<<<============================================================*/
 
-/*>>>>Gerenciar Estoque ============================================================
+        //Função exibir produtos
+function exibirArrayProdutos(array $arrayProdutos){
+
+    echo 'LISTA DE PRODUTOS' . PHP_EOL;
+    echo '============================' . PHP_EOL;
+    foreach ($arrayProdutos as $chave => $item) {
+        echo PHP_EOL . "#{$chave}:";
+        foreach ($item as $value) {
+            echo " {$value}";
+        }
+    }
+}
+        //Exibindo produtos
+exibirArrayProdutos($produtos);
+
+//2 - Gerenciar Estoque ============================================================
+$produtos = [
+    [
+        'nome' => 'Leite Longa Vida',
+        'preco' => 3.59,
+        'fabricante' => 'ParmaVita',
+        'embalagem' => '1L',
+        'quantidade' => 50
+    ],
+    [
+        'nome' => 'Achocolatado em Pó',
+        'preco' => 13.99,
+        'fabricante' => 'Neschoc',
+        'embalagem' => '700g',
+        'quantidade' => 20
+    ],
+    [
+        'nome' => 'Azeite de Oliva',
+        'preco' => 28.50,
+        'fabricante' => 'Galinho',
+        'embalagem' => '500ml',
+        'quantidade' => 25
+    ],
+    [
+        'nome' => 'Refrigerante de Limão',
+        'preco' => 7.40,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L',
+        'quantidade' => 30
+    ],
+    [
+        'nome' => 'Chá Mate',
+        'preco' => 7.10,
+        'fabricante' => 'Refresh',
+        'embalagem' => '2L',
+        'quantidade' => 15
+    ]
+];
+
+function adicionarProduto(array $arrayProdutos, int $codigoProduto, int $qtd): array
+{
+    if ($qtd <= 0) {
+        throw new Exception('Quantidade inválida!');
+    } else if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
+        throw new Exception('Código de produto inválido!');
+    }
+    $arrayProdutos[$codigoProduto]['quantidade'] += $qtd;
+    return $arrayProdutos;
+}
+
+function removerProduto(array $arrayProdutos, int $codigoProduto, int $qtd): array
+{
+    if ($qtd <= 0) {
+        throw new Exception('Quantidade inválida!');
+    } else if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
+        throw new Exception('Código de produto inválido!');
+    } elseif ($qtd > $arrayProdutos[$codigoProduto]['quantidade']) {
+        throw new Exception('Quantidade indisponível!');
+    }
+    $arrayProdutos[$codigoProduto]['quantidade'] -= $qtd;
+    return $arrayProdutos;
+}
+
+function verificarDisponibilidade(array $arrayProdutos, int $codigoProduto): string
+{
+    if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
+        throw new Exception('Código de produto inválido!');
+    }
+    $mensagem = "O produto {$arrayProdutos[$codigoProduto]['nome']} possui em estoque {$arrayProdutos[$codigoProduto]['quantidade']} unidade(s)";
+    return $mensagem;
+}
+
+
+    //adicionando produto
+var_dump($produtos);
+
+try {
+    $produtos = adicionarProduto($produtos, 0, 10);
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
+
+var_dump($produtos);
+
+    //removendo produto
+var_dump($produtos);
+
+try {
+    $produtos = removerProduto($produtos, 0, 10);
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
+
+var_dump($produtos);
+
+    //verificando disponibilidade de produto
+try {
+    echo verificarDisponibilidade($produtos, 0);
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+}
+
+//3 - Analisar Produto ============================================================
 $produtos = [
     [
         'nome' => 'Leite Longa Vida',
@@ -116,159 +230,41 @@ echo retornarProdutoMaisCaro($produtos) . PHP_EOL;
 echo retornarProdutoMaisBarato($produtos) . PHP_EOL;
 echo retornarMediaDePreco($produtos);
 
-<<<<============================================================*/
-
-
-/*>>>>Gerenciar Estoque ============================================================
-$produtos = [
-    [
-        'nome' => 'Leite Longa Vida',
-        'preco' => 3.59,
-        'fabricante' => 'ParmaVita',
-        'embalagem' => '1L',
-        'quantidade' => 50
-    ],
-    [
-        'nome' => 'Achocolatado em Pó',
-        'preco' => 13.99,
-        'fabricante' => 'Neschoc',
-        'embalagem' => '700g',
-        'quantidade' => 20
-    ],
-    [
-        'nome' => 'Azeite de Oliva',
-        'preco' => 28.50,
-        'fabricante' => 'Galinho',
-        'embalagem' => '500ml',
-        'quantidade' => 25
-    ],
-    [
-        'nome' => 'Refrigerante de Limão',
-        'preco' => 7.40,
-        'fabricante' => 'Refresh',
-        'embalagem' => '2L',
-        'quantidade' => 30
-    ],
-    [
-        'nome' => 'Chá Mate',
-        'preco' => 7.10,
-        'fabricante' => 'Refresh',
-        'embalagem' => '2L',
-        'quantidade' => 15
+//4 - Criar Cliente ============================================================
+$cliente = [
+    'nome'=>'Juquinha da Silva',
+    'email'=> 'juquinha@email.com.br',
+    'celular'=>'5513988775544',
+    'endereço'=>[
+        'cep'=>'11077888',
+        'tipoLogradouro'=>'Avenida',
+        'logradouro'=>'7 de setembro',
+        'numero'=>"343",
+        'complemento'=>'ap 44',
+        'cidade'=>'Old City'
     ]
 ];
 
-function adicionarProduto(array $arrayProdutos, int $codigoProduto, int $qtd): array
-{
-    if ($qtd <= 0) {
-        throw new Exception('Quantidade inválida!');
-    } else if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
-        throw new Exception('Código de produto inválido!');
+
+//5 - Condição de Desconto ============================================================
+function verificarDesconto(float $valorCompra):float{
+    if ($valorCompra>=100.00) {
+        return round(($valorCompra * 0.9),2,PHP_ROUND_HALF_UP);
     }
-    $arrayProdutos[$codigoProduto]['quantidade'] += $qtd;
-    return $arrayProdutos;
+    return round(($valorCompra),2,PHP_ROUND_HALF_UP);
 }
 
-function removerProduto(array $arrayProdutos, int $codigoProduto, int $qtd): array
-{
-    if ($qtd <= 0) {
-        throw new Exception('Quantidade inválida!');
-    } else if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
-        throw new Exception('Código de produto inválido!');
-    } elseif ($qtd > $arrayProdutos[$codigoProduto]['quantidade']) {
-        throw new Exception('Quantidade indisponível!');
+function exibirDesconto(float $valorCompra):string{
+    if($valorCompra===verificarDesconto($valorCompra)){
+        $mensagem="Você não possui desconto.";
+    } else {
+        $mensagem="Você possui desconto!";
     }
-    $arrayProdutos[$codigoProduto]['quantidade'] -= $qtd;
-    return $arrayProdutos;
+    return PHP_EOL .  "$mensagem " . PHP_EOL . 
+           "Total da Compra R$ $valorCompra"  . PHP_EOL . 
+           "Total da Compra Com Desconto R$ " . verificarDesconto($valorCompra);      
 }
 
-function verificarDisponibilidade(array $arrayProdutos, int $codigoProduto): string
-{
-    if ($codigoProduto < 0 || $codigoProduto >= count($arrayProdutos) - 1) {
-        throw new Exception('Código de produto inválido!');
-    }
-    $mensagem = "O produto {$arrayProdutos[$codigoProduto]['nome']} possui em estoque {$arrayProdutos[$codigoProduto]['quantidade']} unidade(s)";
-    return $mensagem;
-}
+echo exibirDesconto(1023.99);
+echo exibirDesconto(23.99);
 
-
-//adicionando produto
-var_dump($produtos);
-
-try {
-    $produtos = adicionarProduto($produtos, 0, 10);
-} catch (Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
-}
-
-var_dump($produtos);
-
-//removendo produto
-var_dump($produtos);
-
-try {
-    $produtos = removerProduto($produtos, 0, 10);
-} catch (Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
-}
-
-var_dump($produtos);
-
-//verificando disponibilidade de produto
-try {
-    echo verificarDisponibilidade($produtos, 0);
-} catch (Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
-}
-<<<<============================================================*/
-
-
-/*>>>>Criar Lista de Produto============================================================
-$produtos = [
-    [
-        'nome' => 'Leite Longa Vida',
-        'preco' => 3.59,
-        'fabricante' => 'ParmaVita',
-        'embalagem' => '1L'
-    ],
-    [
-        'nome' => 'Achocolatado em Pó',
-        'preco' => 13.99,
-        'fabricante' => 'Neschoc',
-        'embalagem' => '700g'
-    ],
-    [
-        'nome' => 'Azeite de Oliva',
-        'preco' => 28.50,
-        'fabricante' => 'Galinho',
-        'embalagem' => '500ml'
-    ],
-    [
-        'nome' => 'Refrigerante de Limão',
-        'preco' => 7.40,
-        'fabricante' => 'Refresh',
-        'embalagem' => '2L'
-    ],
-    [
-        'nome' => 'Chá Mate',
-        'preco' => 7.10,
-        'fabricante' => 'Refresh',
-        'embalagem' => '2L'
-    ]
-];
-
-//Função exibir produtos
-function exibirArrayProdutos(array $arrayProdutos){
-
-    echo 'LISTA DE PRODUTOS' . PHP_EOL;
-    echo '============================' . PHP_EOL;
-    foreach ($arrayProdutos as $chave => $item) {
-        echo PHP_EOL . "#{$chave}:";
-        foreach ($item as $value) {
-            echo " {$value}";
-        }
-    }
-}
-//Exibindo produtos
-exibirArrayProdutos($produtos);
-<<<<============================================================*/

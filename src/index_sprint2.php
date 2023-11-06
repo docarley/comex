@@ -1,10 +1,12 @@
 <?php
+/*** SPRINT2 = 6 no total***/
 
+//1 Criar objeto cliente=============================================================
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Docarley\Comex\Model\{Cliente, Endereco, Produto, Pedido, CarrinhoCompra, EstoqueIndisponivelException};
+use Docarley\Comex\Model\{Cliente, Endereco, Produto, Pedido, CarrinhoCompra};
 
-/*1*/
+
 
 $cliente = new Cliente(
     'Pedrinho',
@@ -18,34 +20,34 @@ echo $cliente->exibirDadosCliente();
 
 echo PHP_EOL . $cliente->getEndereco()->toString();
 
-/*2*/
+// 2 Criar objeto produto=============================================================
 $produto = new Produto("Leite Longa Vida Parmaleite 1L", 4.59, 200);
 
 //Adicionando produto
-//$produto->adicionarProduto(10);
-//echo PHP_EOL . $produto->toString() . PHP_EOL;
+$produto->adicionarProduto(10);
+echo PHP_EOL . $produto->toString() . PHP_EOL;
 //Removendo produto
-//$produto->removerProduto(5);
-//echo $produto->toString() . PHP_EOL;
+$produto->removerProduto(5);
+echo $produto->toString() . PHP_EOL;
 //Adicionando produto - quantidade inválida
-//$produto->adicionarProduto(0);
-//if ($produto->adicionarProduto(0)<0) {
-//    echo "Produto não adicionado, um erro ocorreu!". PHP_EOL;    
-//}
+$produto->adicionarProduto(0);
+if ($produto->adicionarProduto(0)<0) {
+    echo "Produto não adicionado, um erro ocorreu!". PHP_EOL;    
+}
 //Removendo produto - quantidade inválida
-//$produto->removerProduto(0);
-//if ($produto->removerProduto(0)<0) {
-//    echo "Produto não removido, um erro ocorreu!". PHP_EOL;    
-//}
-//echo $produto->toString() . PHP_EOL;
+$produto->removerProduto(0);
+if ($produto->removerProduto(0)<0) {
+    echo "Produto não removido, um erro ocorreu!". PHP_EOL;    
+}
+echo $produto->toString() . PHP_EOL;
 
-/*3*/
+// 3 Criar objeto pedido=============================================================
 $outroProduto = new Produto("Arroz Tio Juquinha 5kg", 19.90, 100);
 
 $pedido = new Pedido(1, $cliente, [$produto, $outroProduto]);
 echo $pedido->exibirDadosDoPedido();
 
-/*4*/
+// 4 Pedidos do Cliente =============================================================
 echo $cliente->adicionarPedido($pedido);
 
 $produto1 = new Produto("Achocolatado Neschoc 1kg", 15.99, 120);
@@ -54,7 +56,7 @@ $outroPedido = new Pedido(2, $cliente, [$produto1, $produto2]);
 $cliente->adicionarPedido($outroPedido);
 var_dump($cliente);
 
-/*5*/
+// 5 Criar objeto Carrinho de Compra=============================================================
 
 $carrinho = new CarrinhoCompra([$produto1, $produto2]);
 var_dump($carrinho);
@@ -62,25 +64,7 @@ echo "Valor Total dos Produtos R$: {$carrinho->getValorTotalProdutos()}" . PHP_E
     "Valor do Frete R$: {$carrinho->getValorFrete()}" . PHP_EOL .
     "Valor Total da Compra R$: {$carrinho->getValorTotalCompra()}";
 
-/*6*/
+// 6 Tel formatado =============================================================
 echo $cliente->exibirDadosCliente() . PHP_EOL;
 echo "Telefone Formatado: {$cliente->getTelefoneFormatado()}" . PHP_EOL;
 
-/*** SPRINT3 ***/
-
-/*1-Regras do Estoque*/
-//$meuProduto = new Produto("Refrigerante Guaraná Polo Norte 2L",6.20,4);
-//$meuProduto->adicionarProduto(0);
-
-/*2-Tratando Erros*/
-$meuProduto = new Produto("Refrigerante Guaraná Polo Norte 2L", 6.20, 4);
-try {
-    //intdiv(2,0);
-    $meuProduto->removerProduto(0);
-} catch (InvalidArgumentException $e) {
-    echo "Erro:{$e->getMessage()}";
-} catch (EstoqueIndisponivelException $e) {
-    echo "Erro:{$e->getMessage()}";
-} catch (\Throwable $e) {
-    echo "Erro:{$e->getMessage()}";
-}
