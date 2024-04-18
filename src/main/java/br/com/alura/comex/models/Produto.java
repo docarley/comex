@@ -3,6 +3,7 @@ package br.com.alura.comex.models;
 import java.util.Objects;
 
 public class Produto {
+    //Propriedades já definidas como private
     private String nome;
     private String descricao;
     private double precoUnitario;
