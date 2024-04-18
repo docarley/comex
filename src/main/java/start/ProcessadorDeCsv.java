@@ -1,3 +1,4 @@
+/*
 package start;
 
 import java.io.IOException;
@@ -51,4 +52,4 @@ public class ProcessadorDeCsv {
             throw new RuntimeException("Erro ao abrir Scanner para processar arquivo!");
         }
     }
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package start;
 
 import org.slf4j.Logger;
@@ -78,4 +79,4 @@ public class Main {
         logger.info("PEDIDO MAIS CARO: {} ({})\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisCaro.getPreco().multiply(new BigDecimal(pedidoMaisCaro.getQuantidade())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisCaro.getProduto());
         logger.info("### FIM DO RELATÓRIO ###");
     }
-}
+}*/
