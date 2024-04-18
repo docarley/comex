@@ -1,4 +1,4 @@
-package br.com.alura.comex;
+package start;
 
 import java.io.IOException;
 import java.math.BigDecimal;
