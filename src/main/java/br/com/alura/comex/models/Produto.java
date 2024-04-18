@@ -46,7 +46,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return String.format("Produto{" +
+        return String.format("Produto{" + "\n" +
                 "nome='" + this.getNome() + '\'' +
                 ", descricao='" + this.getDescricao() + '\'' +
                 ", precoUnitario= %.2f" +

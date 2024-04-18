@@ -2,7 +2,7 @@ package br.com.alura.comex.main;
 
 import br.com.alura.comex.models.Produto;
 
-public class Main {
+public class MainProduto {
     public static void main(String[] args) {
         Produto produto1 = new Produto();
 
