@@ -5,6 +5,8 @@ import br.com.alura.comex.models.Endereco;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.Produto;
 
+import java.math.BigDecimal;
+
 public class MainPedido {
     public static void main(String[] args) {
         Cliente cliente1 = new Cliente(); //instanciando com construtor padrão
@@ -22,10 +24,22 @@ public class MainPedido {
         Pedido pedidoCliente1 = new Pedido();
         pedidoCliente1.setCliente(cliente1);
         pedidoCliente1.setID(1);
-        pedidoCliente1.setPreco(89.00);
+        pedidoCliente1.setPreco(new BigDecimal("89.00"));
         pedidoCliente1.setQuantidade(3);
 
         System.out.println(pedidoCliente1);
+
+        Pedido pedidoCliente2 = new Pedido();
+        pedidoCliente2.setCliente(cliente1);
+        pedidoCliente2.setID(2);
+        pedidoCliente2.setPreco(new BigDecimal("100.00"));
+        pedidoCliente2.setQuantidade(5);
+
+        System.out.println("Comparando pedidos");
+        System.out.println("Pedido de valor total " + pedidoCliente1.getValorTotal() + " é mais barato que pedido de valor total " + pedidoCliente2.getValorTotal() + "?");
+        System.out.println(pedidoCliente1.isMaisBaratoQue(pedidoCliente2));
+        System.out.println("Pedido de valor total " + pedidoCliente1.getValorTotal() + " é mais caro que pedido de valor total " + pedidoCliente2.getValorTotal()+ "?");
+        System.out.println(pedidoCliente1.isMaisCaroQue(pedidoCliente2));
 
     }
 }
