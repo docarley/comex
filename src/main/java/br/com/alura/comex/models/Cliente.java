@@ -8,6 +8,10 @@ public class Cliente {
     private String telefone;
     private Endereco endereco;
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }

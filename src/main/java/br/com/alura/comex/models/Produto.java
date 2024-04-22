@@ -1,13 +1,28 @@
 package br.com.alura.comex.models;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Produto {
     //Propriedades já definidas como private
     private String nome;
     private String descricao;
-    private double precoUnitario;
-    private int quantidade;
+    private BigDecimal precoUnitario;
+    private Integer quantidade;
+
+    //sobrecarga de construtores
+    public Produto(String nome, BigDecimal precoUnitario, Integer quantidade) {
+        this.nome = nome;
+        this.precoUnitario = precoUnitario;
+        this.quantidade = quantidade;
+    }
+
+    public Produto(String nome, String descricao, BigDecimal precoUnitario, Integer quantidade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.precoUnitario = precoUnitario;
+        this.quantidade = quantidade;
+    }
 
     public String getNome() {
         return this.nome;
@@ -17,11 +32,11 @@ public class Produto {
         return this.descricao;
     }
 
-    public double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return this.precoUnitario;
     }
 
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return this.quantidade;
     }
 
@@ -34,7 +49,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public void setPrecoUnitario(Double precoUnitario) {
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
 //        if (precoUnitario<0) return;
         this.precoUnitario = precoUnitario;
     }

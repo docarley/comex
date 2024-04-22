@@ -2,23 +2,14 @@ package br.com.alura.comex.main;
 
 import br.com.alura.comex.models.Produto;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class MainComparacao {
     public static void main(String[] args) {
-        Produto produto1 = new Produto();
+        Produto produto1 = new Produto("Mouse Microsoft","Modelo MS091231",new BigDecimal("89.00"),2);
 
-        produto1.setNome("Mouse Microsoft");
-        produto1.setDescricao("Modelo MS091231");
-        produto1.setQuantidade(15);
-        produto1.setPrecoUnitario(89.00);
-
-        Produto produto2 = new Produto();
-
-        produto2.setNome("Mouse Microsoft");
-        produto2.setDescricao("Modelo MS091231");
-        produto2.setQuantidade(15);
-        produto2.setPrecoUnitario(89.00);
+        Produto produto2 = new Produto("Mouse Microsoft","Modelo MS091231",new BigDecimal("89.00"),2);
 
         int i =0;
       while(i<=1) {
