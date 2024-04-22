@@ -12,14 +12,17 @@ public class Produto {
 
     //sobrecarga de construtores
     public Produto(String nome, BigDecimal precoUnitario, Integer quantidade) {
+        //Neste construtor o usuário da classe já é obrigado a fornecer um nome,bem como preço e quantidade
         this.nome = nome;
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
+        this.setDescricao("");
     }
 
     public Produto(String nome, String descricao, BigDecimal precoUnitario, Integer quantidade) {
+        //Neste construtor o usuário da classe já é obrigado a fornecer um nome,bem como preço, quantidade e descricao
         this.nome = nome;
-        this.descricao = descricao;
+        setDescricao(descricao);
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
     }
@@ -46,6 +49,10 @@ public class Produto {
     }
 
     public void setDescricao(String descricao) {
+        if (descricao==null || descricao.isEmpty()) {
+            this.descricao="Não disponível";
+            return;
+        }
         this.descricao = descricao;
     }
 
@@ -77,4 +84,9 @@ public class Produto {
         return Objects.equals(getNome(), produto.getNome()) && Objects.equals(getDescricao(), produto.getDescricao());
     }
 
+    public String imprimirDados(){
+        return "\n>> Dados do Produto "+ "\n\n" +
+                "::Nome:" + this.getNome() + "\n\n" +
+                "::Descricao:" + this.getDescricao();
+    }
 }
