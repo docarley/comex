@@ -4,9 +4,12 @@ import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.Endereco;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.Produto;
+import br.com.alura.comex.services.FiltroPedidoPorValor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MainPedido {
@@ -91,6 +94,16 @@ public class MainPedido {
             System.out.println(item.sintetizarPedido());
         }
 
-        //6 -
+        //6 - ordenando a lista de pedidos por valor total: maior para menor
+        Collections.sort(listaPedidos,new FiltroPedidoPorValor().reversed());
+        for (Pedido item:listaPedidos){
+            System.out.println(item.sintetizarPedido());
+        }
+
+        //7 - ordenando a lista de pedidos por valor total: menor para maior
+        Collections.sort(listaPedidos,new FiltroPedidoPorValor());
+        for (Pedido item:listaPedidos){
+            System.out.println(item.sintetizarPedido());
+        }
     }
 }
